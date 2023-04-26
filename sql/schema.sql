@@ -1,0 +1,35 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE users(
+  username VARCHAR(20) NOT NULL,
+  fullname VARCHAR(40) NOT NULL,  
+  password VARCHAR(256) NOT NULL, 
+  created DATETIME DEFAULT CURRENT_TIMESTAMP, 
+  PRIMARY KEY(username)
+);
+
+CREATE TABLE teams(
+    abbr VARCHAR(10) NOT NULL, 
+    name VARCHAR(100) NOT NULL,
+    PRIMARY KEY(abbr)
+);
+
+CREATE TABLE games(
+    gameid INTEGER PRIMARY KEY, 
+    home VARCHAR(10) NOT NULL, 
+    away VARCHAR(10) NOT NULL,
+    date DATETIME NOT NULL,
+    FOREIGN KEY(home) REFERENCES teams ON DELETE CASCADE,
+    FOREIGN KEY(away) REFERENCES teams ON DELETE CASCADE
+);
+
+CREATE TABLE guesses(
+    gameid INTEGER NOT NULL,
+    username VARCHAR(20) NOT NULL,
+    team VARCHAR(10) NOT NULL,
+    date DATETIME NOT NULL,
+    PRIMARY KEY(gameid, username),
+    FOREIGN KEY(gameid) REFERENCES games ON DELETE CASCADE,
+    FOREIGN KEY(username) REFERENCES users ON DELETE CASCADE,
+    FOREIGN KEY(date) REFERENCES games ON DELETE CASCADE
+);
