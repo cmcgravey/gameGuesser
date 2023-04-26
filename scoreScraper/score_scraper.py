@@ -5,6 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from datetime import date
 from datetime import timedelta
 import re
+import requests
 
 
 game_dict = {}
@@ -66,17 +67,12 @@ def scrape_for_next_games():
 teams_won = scrape_for_scores(d1)
 tmr_matchups = scrape_for_next_games()
 
-print(f"Winners for {d1}: ")
-print("\n")
+url = f'http://localhost:8000/v1/api/update/?type=winners'
+obj = {"winners": teams_won}
+requests.post(url, json = obj)
 
-for entry in teams_won:
-    print(entry)
-
-print("\n")
-print(f"Matchups for {today}: ")
-print("\n")
-
-for entry in tmr_matchups:
-    print(entry)
+url = f'http://localhost:8000/v1/api/update/?type=matchups'
+obj = {"matchups": tmr_matchups}
+requests.post(url, json = obj)
 
 

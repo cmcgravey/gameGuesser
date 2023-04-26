@@ -12,8 +12,8 @@ def update_db():
 
     type = flask.request.args['type']
     if type == 'winners':
-        
+        print(flask.request.json)
         return flask.jsonify({"message": "winners"})
     elif type == 'matchups':
-        
+        print(flask.request.json)
         return flask.jsonify({"message": "matchups"})
