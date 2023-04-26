@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="/static/css/login.css">
+        <title>GameGuesser</title>
+    </head>
+
+    <body>
+
+
+
+        <form action="/accounts/?target=/" method="post" enctype="multipart/form-data" class="card-header">
+            <input type="text" name="username" placeholder="Username" required/> 
+            <input type="password" name="password" placeholder="Password" required/>
+            <input type="submit" value="login"/>
+            <input type="hidden" name="operation" value="login"/>
+        </form>
+
+        <p class=account-create> Don't have an account? <a href="/accounts/create/" id="create-account-link"> Sign Up </a> </p>
+
+    </body>
+
+</html>

@@ -23,6 +23,7 @@ case $1 in
   "create")
     mkdir -p var
     sqlite3 var/scoresapi.sqlite3 < sql/schema.sql
+    sqlite3 var/scoresapi.sqlite3 < sql/data.sql
     ;;
   "destroy")
     rm -rf var/scoresapi.sqlite3
