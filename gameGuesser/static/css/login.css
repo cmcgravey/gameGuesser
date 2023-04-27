@@ -1,0 +1,46 @@
+body {
+    background-color: #55799B;
+}
+
+
+.logo {
+    text-align: center;
+    margin-top: 20px; 
+}
+
+.card {
+    margin-left: 35%; 
+    margin-right: 35%;
+    margin-top: 30px;
+    background-color: #80B4C8;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: black;
+}
+
+form {
+    margin-top: 10px; 
+}
+
+.form-group {
+    margin-top: 5px;
+    margin-left: 10%; 
+    margin-right: 10%;  
+}
+
+.form-control {
+    border-radius: 2px; 
+    border-width: 1px; 
+    border-color: black;
+}
+
+#login-button {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.account-create {
+    text-align: center;
+    margin-top: 10px; 
+    margin-bottom: 0px; 
+}
