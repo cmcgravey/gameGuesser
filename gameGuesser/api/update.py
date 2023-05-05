@@ -13,17 +13,28 @@ def update_db():
 
     type = flask.request.args['type']
     if type == 'winners':
-        print(flask.request.json)
+        msg = flask.request.json
+        for winner in msg['winners']:
+            print(winner)
+            cur = connection.execute(
+                "UPDATE guesses "
+                "SET outcome = TRUE "
+                "WHERE date = ? AND team = ? "
+                "RETURNING * ",
+                (msg['date'], winner, ) 
+            )
+            updated = cur.fetchall()
+            print(f"updated {str(len(updated))} rows")
+
         return flask.jsonify({"message": "winners"})
     elif type == 'matchups':
 
         msg = flask.request.json
-
         for matchup in msg["matchups"]:
             connection.execute(
-                "INSERT INTO games(home, away, date) "
-                "VALUES (?, ?, ?)", 
-                (matchup[1], matchup[0], msg['date'], )
+                "INSERT OR IGNORE INTO games(home, away, time, date) "
+                "VALUES (?, ?, ?, ?)", 
+                (matchup['home'], matchup['away'], matchup['time'], msg['date'], )
             )
         
-        return flask.jsonify({"message": "matchups"}), 201
+        return flask.jsonify({"message": "matchups"})

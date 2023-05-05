@@ -1,0 +1,19 @@
+.navbar {
+    background-color: #55799B;
+    border-bottom: 10px;
+    border-color: black;
+    border-width: 2px 0px 2px 0px;
+    border-style: solid;
+}
+
+.navbar-brand {
+    margin-top: 5px;
+}
+
+#pillNav2 {
+    background-color:  #80B4C8;
+    border-style: solid; 
+    border-color: black; 
+    border-width: 1px;
+    margin-right: 100px; 
+}

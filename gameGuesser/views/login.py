@@ -24,14 +24,11 @@ def show_create():
 
 @gameGuesser.app.route('/accounts/', methods=['POST'])
 def account_form():
-    if 'username' not in flask.session:
-        return flask.redirect(flask.url_for('show_login'))
-    
     connection = gameGuesser.model.get_db()
 
     if flask.request.form['operation'] == 'login':
         login_user(connection)
-    elif flask.request.form['operation'] == 'create':
+    if flask.request.form['operation'] == 'create':
         create_user(connection)
 
     
@@ -56,7 +53,7 @@ def login_user(connection):
     correct = cur.fetchall()
     if correct == []:
         flask.abort(403, "Username doesn't exist in database")
-    elif verify_password(correct[0]['password'], password) is False:
+    if verify_password(correct[0]['password'], password) is False:
         flask.abort(403, 'Incorrect password')
     else:
         flask.session['username'] = logname
@@ -111,7 +108,7 @@ def create_user(connection):
     connection.execute(
         "INSERT "
         "INTO users(username, fullname, password, favorite) "
-        "VALUES (?, ?, ?, ?, ?)",
+        "VALUES (?, ?, ?, ?)",
         (logname, fullname, password, fav_team, )
     )
     flask.session['username'] = logname

@@ -19,7 +19,9 @@ CREATE TABLE games(
     gameid INTEGER PRIMARY KEY AUTOINCREMENT, 
     home VARCHAR(10) NOT NULL, 
     away VARCHAR(10) NOT NULL,
-    date DATETIME NOT NULL,
+    time VARCHAR(20) NOT NULL,   
+    date DATETIME NOT NULL, 
+    UNIQUE(home, away, time),  
     FOREIGN KEY(home) REFERENCES teams ON DELETE CASCADE,
     FOREIGN KEY(away) REFERENCES teams ON DELETE CASCADE
 );
@@ -29,6 +31,7 @@ CREATE TABLE guesses(
     username VARCHAR(20) NOT NULL,
     team VARCHAR(10) NOT NULL,
     date DATETIME NOT NULL,
+    outcome VARCHAR(20) NOT NULL,
     PRIMARY KEY(gameid, username),
     FOREIGN KEY(gameid) REFERENCES games ON DELETE CASCADE,
     FOREIGN KEY(username) REFERENCES users ON DELETE CASCADE,
